@@ -1,0 +1,109 @@
+{%  extends 'base.html' %}
+
+
+{% block title %}Contact{% endblock title %}
+
+
+
+{% block body %}
+ <div class="container">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ business.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{% static 'images/waffle-bg.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .cuisine-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="fw-bold">{{ business.name }}</h2>
+        <a class="btn btn-danger px-4" href="#">ORDER NOW</a>
+    </div>
+    <p class="text-muted">
+        {% if is_open %}
+            <span class="text-success">● Open</span>
+        {% else %}
+            <span class="text-danger">● Closed</span>
+        {% endif %}
+        &nbsp; | &nbsp;
+        <strong>⭐ {{ business.rating }}</strong> ({{ business.total_reviews }}+ reviews)
+    </p>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <div class="card">
+                <h5 class="fw-bold">📌 INFO</h5>
+                <p>
+  CONTACT- 8797634565<br>
+  EMAIL-ankitjha12809@gmail.com<br>
+  ADDRESS- ranchi
+</p>
+                <p>{{ business.description }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <h5 class="fw-bold">🍨 CUISINES</h5>
+                <div class="d-flex gap-3 mt-3">
+                    {% for cuisine in cuisines %}
+                        <div class="text-center">
+                            <img src="{{ cuisine.image.url }}" class="cuisine-img" alt="{{ cuisine.name }}">
+                            <div class="small">{{ cuisine.name }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <h5 class="fw-bold">🕓 OPENING HOURS</h5>
+                <table class="table table-sm table-bordered text-center mt-2">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Day</th>
+                            <th>Pickup</th>
+                            <th>Delivery</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hour in hours %}
+                        <tr>
+                            <td>{{ hour.get_day_display }}</td>
+                            <td class="{% if hour.pickup_time|lower == 'closed' %}text-danger{% endif %}">{{ hour.pickup_time }}</td>
+                            <td class="{% if hour.delivery_time|lower == 'closed' %}text-danger{% endif %}">{{ hour.delivery_time }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+ </div>    
+{% endblock body %}
+
