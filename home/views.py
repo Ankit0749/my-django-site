@@ -5,15 +5,15 @@ def index(request):
     context= {
         'variable': "this is sent "
     }
-    return render(request, 'index.html',context)
+    return render(request, 'home/index.html',context)
     # return HttpResponse("this is home page ")
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'home/about.html')
 
 
 def services(request):
-    return render(request, 'services.html')
+    return render(request, 'home/services.html')
 
 
 # app/views.py
@@ -22,7 +22,7 @@ def contact(request):
     cuisines = Cuisine.objects.all()
     hours = OpeningHour.objects.all()
     is_open = True  # Optional: implement your own logic here
-    return render(request, 'contact.html', {
+    return render(request, 'home/contact.html', {
         'business': business,
         'cuisines': cuisines,
         'hours': hours,
