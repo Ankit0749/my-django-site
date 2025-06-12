@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d=613+9s$nip0j7q!=lln73g1(8@=5!w&l@ewbr*4-n9@*k@zw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['Ankiticecream.com','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['my-django-site-production.up.railway.app','127.0.0.1', 'localhost']
 
 
 
